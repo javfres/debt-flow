@@ -6,28 +6,31 @@ const DebtFlow = require('./debtflow');
 
 const df = new DebtFlow();
 
-df.addExpense("Alice", 10, "Food");
+df.addExpense("Alice", 10, "Food", ["Bob","Carl"]);
 df.addExpense("Bob",   20, "Beer", ["Alice"]);
-df.addExpense("Carl",   9, "Desert");
+df.addExpense("Carl",   9, "Desert", ["Alice","Bob"]);
+df.addExpense("Carl",   12, "Desert - B", ["Alice","Bob"]);
 
-df.addExpense("Dani",   30, "XXX", ["Elsa"]);
-df.addExpense("Elsa",   10, "XXX", ["Dani"]);
-df.addExpense("Faith",   10, "XXX", ["Elsa"]);
-df.addExpense("Gate",   30, "XXX", ["Alice"]);
-df.addExpense("ZZZ",   2, "XXX");
+df.addExpense("Dani",   30, "Music", ["Elsa"]);
+df.addExpense("Elsa",   10, "Music", ["Dani"]);
+df.addExpense("Faith",   10, "Music", ["Elsa"]);
+df.addExpense("Gate",   30, "Music", ["Alice"]);
+df.addExpense("Allo",   10, "Money", ["Alice"], false);
 
-
-df.addDebt("Moroso", 100, "Alice");
-df.addDebt("Moroso2", 100, "Moroso");
-df.addDebt("Moroso3", 100, "Moroso2");
+df.addExpense("Misteriso",   10, "Money", ["Allo"], false);
 
 
-df.addDebt("B", 100, "C");
-df.addDebt("A", 100, "B");
+df.addExpense("Javi",   10, "Tortilla");
+df.addExpense("Otro",   10, "Tortilla 2", ["Javi"]);
 
 
-//df.addExpense("Carl",   9, "Desert 2");
-df.flow();
+console.log("**************** INFO ****************");
+df.info();
+console.log("**************** all 2 all ****************");
+df.flow(false);
+console.log("**************** only known ****************");
+df.flow(true);
+
 
 
 

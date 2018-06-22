@@ -124,6 +124,14 @@ class Tree {
     }
     
     
+    debug(title = 'tree'){
+        console.log("=== " + title + " ===");
+        this.map( (a,b,v) => {
+            console.log("--", a,"->",b, ":",v,"$");
+        });
+    }
+    
+    
 }
 
 
