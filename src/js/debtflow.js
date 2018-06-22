@@ -147,7 +147,7 @@ class DebtFlow {
         });
         
         
-        console.log(util.inspect(info, false, null, true));
+        //console.log(util.inspect(info, false, null, true));
         
         return info;
         
@@ -299,7 +299,7 @@ class DebtFlow {
         
         
 
-        console.log(util.inspect(res, false, null, true));
+        //console.log(util.inspect(res, false, null, true));
 
 
         return res;

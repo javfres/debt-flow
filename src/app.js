@@ -13,11 +13,13 @@ import App from './vue/App.vue'
 // The components
 import PersonList from './vue/components/PersonList.vue'
 import ExpenseList from './vue/components/ExpenseList.vue'
+import Info from './vue/components/Info.vue'
 import Results from './vue/components/Results.vue'
 
 
 Vue.component('PersonList', PersonList);
 Vue.component('ExpenseList', ExpenseList);
+Vue.component('Info', Info);
 Vue.component('Results', Results);
 
 
