@@ -1,1 +1,80 @@
 
+
+$main-color: #a8d0e6;
+
+$c1: #f8e9a1;
+$c2: #f76c6c;
+$c2: #374785;
+
+
+
+* {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+    color: darken($main-color, 50%);
+}
+
+body {
+    background-color: $main-color;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 500px;
+    
+    @media (max-width: 600px)  {
+        width: 100%;
+    }
+}
+
+
+#title {
+    h1 {
+        font-size: 35px;
+    }
+}
+
+
+
+
+.part {
+    
+    background-color: lighten($main-color, 10%);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px 15px;
+    
+}
+
+
+.card-container {
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    .card {
+        
+        border-style: solid;
+        border-width: 1px;
+        border-color: $main-color;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+
+    }
+    
+}
+
+
+
+
+

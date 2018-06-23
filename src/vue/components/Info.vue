@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="part">
       
       <h1>Info</h1>
      
@@ -53,6 +53,8 @@ export default {
     watch: {
         debtflow(){
             this.info = this.debtflow ? this.debtflow.info() : [];
+            console.log(this.info );
+
         }
     },
     

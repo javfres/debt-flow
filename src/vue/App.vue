@@ -1,7 +1,33 @@
 <template>
   <div id="app">
       
-      hola
+      <div id="title">
+          <h1>Debt Flow</h1>
+          <p>Calculate how much money should each person pay</p>
+      </div>
+      
+      <div class="part">
+          Part 1
+          
+          <div class="card-container">
+              <div class="card">
+                  A card 
+              </div>
+              <div class="card">
+                  A card 
+              </div> 
+              <div class="card">
+                  A card  2 3 
+              </div> 
+              <div class="card">
+                  A card 
+              </div> 
+              <div class="card">
+                  A card 
+              </div> 
+          </div>
+          
+      </div>
       
       <PersonList v-model="people"></PersonList>
       <ExpenseList :people="people" v-model="expenses"></ExpenseList>
@@ -22,8 +48,13 @@ export default {
     data () {
         return {
             
-            people: ["Alice", "Bob", "Charles"],
-            expenses: [{who:"Alice",amount:12},{who:"Charles",amount:10}],
+            people: ["Alice", "Bob", "Charles", "Dought"],
+            expenses: [
+                {who:"Alice",amount:2,concept:"Desert", to:['Bob']},
+                {who:"Alice",amount:12,concept:"Food"},
+                {who:"Charles",amount:10},
+                {who:"Charles",amount:13, concept:"Tortilla"},
+                {who:"Dought",amount:5, to:['Bob'],concept:"Beer"}],
             debtflow: null,
     
         }
@@ -47,7 +78,8 @@ export default {
             });
             
             this.expenses.map(e => {
-                df.addExpense(e.who, e.amount); //, "Food", ["Bob","Carl"]);
+                console.log(e);
+                df.addExpense(e.who, e.amount, e.concept, e.to);
             });
             
             this.debtflow = df;
@@ -71,10 +103,6 @@ export default {
 
 <style lang="scss" scoped>
 
-#app {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+
 
 </style>

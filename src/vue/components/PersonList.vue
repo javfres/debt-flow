@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="part">
       
       <h1>Person list</h1>
       <ul>
