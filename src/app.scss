@@ -1,6 +1,10 @@
 
+@import "~bulma"
+
+/*
 
 $main-color: #a8d0e6;
+$default-width: 500px;
 
 $c1: #f8e9a1;
 $c2: #f76c6c;
@@ -8,7 +12,7 @@ $c2: #374785;
 
 
 
-* {
+html {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	font-style: normal;
@@ -28,9 +32,9 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 500px;
+    width: $default-width;
     
-    @media (max-width: 600px)  {
+    @media (max-width: $default-width+100px)  {
         width: 100%;
     }
 }
@@ -50,7 +54,7 @@ body {
     background-color: lighten($main-color, 10%);
     padding: 10px;
     margin-top: 10px;
-    border-radius: 5px 15px;
+    border-radius: 15px 5px;
     
 }
 
@@ -75,6 +79,5 @@ body {
 }
 
 
-
-
-
+@import 'css/modal.scss';
+*/

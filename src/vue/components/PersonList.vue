@@ -10,6 +10,11 @@
           <li><input type="text" placeholder="New person" v-model="new_person" @keydown.enter.prevent="add_person()" ></input></li>
       </ul>
 
+      <button @click="showModal = true" >+</button>
+      <!--
+      <ModalTemplate v-if="showModal" @close="showModal = false"></ModalTemplate>
+    -->
+        
   </div>
 </template>
 
@@ -24,6 +29,7 @@ export default {
     data () {
         return {
             new_person: '',
+            showModal: true,
         }
     },
     

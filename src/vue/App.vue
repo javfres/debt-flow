@@ -1,33 +1,93 @@
 <template>
   <div id="app">
       
-      <div id="title">
-          <h1>Debt Flow</h1>
-          <p>Calculate how much money should each person pay</p>
-      </div>
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">Debt Flow</h1>
+                <h2 class="subtitle">Calculate how much money should each person pay</h2>
+            </div>
+        </div>
+    </section>
       
-      <div class="part">
-          Part 1
-          
-          <div class="card-container">
-              <div class="card">
-                  A card 
-              </div>
-              <div class="card">
-                  A card 
-              </div> 
-              <div class="card">
-                  A card  2 3 
-              </div> 
-              <div class="card">
-                  A card 
-              </div> 
-              <div class="card">
-                  A card 
-              </div> 
-          </div>
-          
-      </div>
+    <section class="section">
+        <div class="container">
+            
+            
+            <div class="columns is-desktop is-centered">
+                <div class="column">
+                
+                    <h1 class="title">Person list</h1>
+                    <p class="subtitle">List of people</p>
+                
+                    <table class="table is-hoverable is-fullwidth">
+                        <thead>
+                            <tr>
+                                <th>Avatar</th>
+                                <th>Name</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p class="image is-32x32">
+                                      <img src="https://bulma.io/images/placeholders/128x128.png">
+                                    </p>
+                                </td>
+                                <td>John dasfd</td>
+                                <td><a class="delete"></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                
+                
+                    <p>Add a new one</p>
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <p class="image is-48x48">
+                              <img src="https://bulma.io/images/placeholders/128x128.png">
+                            </p>
+                        </div>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Names">
+                        </div>
+                        <div class="control">
+                            <a class="button is-primary">Add</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    
+                    <h1 class="title">Expense list</h1>
+                    <p class="subtitle">List of people</p>
+                
+                    
+                </div>
+                
+            </div>
+    
+            
+
+            
+            
+    
+            
+            
+        
+            
+
+
+
+
+
+            
+        </div>
+    </section>
+      
+      
+      
       
       <PersonList v-model="people"></PersonList>
       <ExpenseList :people="people" v-model="expenses"></ExpenseList>
