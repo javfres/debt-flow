@@ -1,29 +1,40 @@
 <template>
-    <div class="part">
+    <div>
 
-        <h1>Expenses list</h1>
+        <h1 class="title">Expenses list</h1>
+        <p class="subtitle">List of the expenses done by each person</p>
 
-        <ul>
+        <table class="table is-hoverable is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Who</th>
+                    <th>Amount</th>
+                    <th>Concept</th>
+                    <th>To</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="e,i in value">
+                    <td>{{e.who}}</td>
+                    <td>{{ e.amount }}</td>
+                    <td><i>{{e.concept}}</i></td>
+                    <td>
+                        <template v-if="e.to">
+                            {{ e.to.join() }}
+                        </template>
+                        <template v-else>
+                            ALL
+                        </template>
+                    </td>
+                    <td class="has-text-right"><a class="delete"  @click.prevent="rm_expense(i)"></a></td>
+                </tr>
+            </tbody>
+        </table>
 
-            <li v-for="e,i in value">
-                {{e.who}} paid  {{ e.amount }}
-                
-                <template v-if="e.concept">
-                    for <i>{{e.concept}}</i>    
-                </template>
 
 
-                
-                <template v-if="e.to">
-                    {{ e.to.join() }}
-                </template>
-                <template v-else>
-                    ALL
-                </template>
-                <a href="#" @click.prevent="rm_expense(i)" >X</a>
-            </li>
-          
-            <li>
+
                 Add: 
                 <select v-model="new_expense.who">
                     <option v-for="p in people" :value="p">{{ p }}</option>
@@ -47,10 +58,7 @@
                 </ul>
                 
                 
-              </li>
-          
-        </ul>
-
+        
 
     </div>
 </template>

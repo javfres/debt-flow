@@ -16,53 +16,13 @@
             
             <div class="columns is-desktop is-centered">
                 <div class="column">
-                
-                    <h1 class="title">Person list</h1>
-                    <p class="subtitle">List of people</p>
-                
-                    <table class="table is-hoverable is-fullwidth">
-                        <thead>
-                            <tr>
-                                <th>Avatar</th>
-                                <th>Name</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <p class="image is-32x32">
-                                      <img src="https://bulma.io/images/placeholders/128x128.png">
-                                    </p>
-                                </td>
-                                <td>John dasfd</td>
-                                <td><a class="delete"></a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                
-                
-                    <p>Add a new one</p>
+                    
+                    <PersonList v-model="people"></PersonList>
 
-                    <div class="field is-grouped">
-                        <div class="control">
-                            <p class="image is-48x48">
-                              <img src="https://bulma.io/images/placeholders/128x128.png">
-                            </p>
-                        </div>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Names">
-                        </div>
-                        <div class="control">
-                            <a class="button is-primary">Add</a>
-                        </div>
-                    </div>
                 </div>
                 <div class="column">
                     
-                    <h1 class="title">Expense list</h1>
-                    <p class="subtitle">List of people</p>
-                
+                    <ExpenseList :people="people" v-model="expenses"></ExpenseList>
                     
                 </div>
                 
@@ -88,12 +48,12 @@
       
       
       
+      <!--
       
-      <PersonList v-model="people"></PersonList>
-      <ExpenseList :people="people" v-model="expenses"></ExpenseList>
       <Info :debtflow="debtflow"></Info>
       <Results :debtflow="debtflow"></Results>
 
+    -->
 
   </div>
 </template>

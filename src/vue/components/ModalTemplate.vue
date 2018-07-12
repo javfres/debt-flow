@@ -1,28 +1,30 @@
 <template>
 
-    <transition name="modal">
-        <div class="modal-mask" @click="clickOutside">
-            <div class="modal-wrapper">
-                <div class="modal-container">
 
-                    <div class="modal-body">
-                        <slot name="body">
-                            default body
-                        </slot>
-                    </div>
 
-                    <div class="modal-footer">
-                        <slot name="footer">
-                            default footer
-                            <button class="modal-default-button" @click="$emit('close')">
-                                OK
-                            </button>
-                        </slot>
-                    </div>
-                </div>
-            </div>
+    <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+
+        <header class="modal-card-head">
+            <p class="modal-card-title">
+                <slot name="title">default title</slot>
+            </p>
+            <button class="delete" aria-label="close" @click="$emit('close')"></button>
+        </header>
+
+        <section class="modal-card-body">
+            <slot name="body">default body</slot>
+        </section>
+
+
+
         </div>
-    </transition>
+        <!--
+        <button class="modal-close is-large" aria-label="close" @click="$emit('close')"></button>
+        -->
+    </div>
+
 
 </template>
 
@@ -45,11 +47,6 @@ export default {
     
     methods: {
         
-        clickOutside(e){
-            const $target = $(e.target);
-            if(!$target.hasClass('modal-wrapper')) return;
-            console.log("CLOSEEE");
-        }
         
     }
 
