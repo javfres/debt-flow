@@ -19,6 +19,7 @@ import Results from './vue/components/Results.vue'
 // Modals
 import ModalTemplate from './vue/components/ModalTemplate.vue'
 import ModalNewPerson from './vue/components/ModalNewPerson.vue'
+import ModalNewExpense from './vue/components/ModalNewExpense.vue'
 
 
 Vue.component('PersonList', PersonList);
@@ -27,6 +28,7 @@ Vue.component('Info', Info);
 Vue.component('Results', Results);
 Vue.component('ModalTemplate', ModalTemplate);
 Vue.component('ModalNewPerson', ModalNewPerson);
+Vue.component('ModalNewExpense', ModalNewExpense);
 
 
 

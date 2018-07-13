@@ -9,6 +9,7 @@
             <form @submit.prevent="onSubmit">
     
                 <div class="field">
+                    <label class="label">Name</label>
                     <div class="control">
                         <input class="input" type="text" placeholder="Name" v-model="name">
                     </div>

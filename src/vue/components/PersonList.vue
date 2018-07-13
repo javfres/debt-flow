@@ -60,34 +60,7 @@
         </div>
     
         -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <!--
-    
-  <div class="part">
-      
-      <h1>Person list</h1>
-      <ul>
-          <li v-for="p,i in value">
-              {{p}}
-              <a href="#" @click.prevent="rm_person(i)" >X</a>
-          </li>
-          <li><input type="text" placeholder="New person" v-model="new_person" @keydown.enter.prevent="add_person()" ></input></li>
-      </ul>
 
-      <button @click="showModal = true" >+</button>
-      <!
-    -->
-        <!--
-  </div>
--->
   
 </div>
 
