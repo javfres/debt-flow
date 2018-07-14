@@ -31,13 +31,13 @@ class DebtFlow {
     // Add a common expense
     // If to is null to all the group or to an array of users
     //
-    addExpense(who, amount, concept, to = null, himself=true){
+    addExpense(who, amount, concept, to = null){
         
         this.addPeople(who);
         if(to){
             to.map(who => this.addPeople(who));
         }
-        this.expenses.push({who, amount, concept, to, himself});
+        this.expenses.push({who, amount, concept, to});
     } // addExpense
     
     //
@@ -67,7 +67,6 @@ class DebtFlow {
             let to = this.people;
             if(e.to){
                 to = e.to.map(x=>x); // To clone
-                if(e.himself) to.push(e.who);
             }
             
             to.map(t => {
@@ -129,7 +128,7 @@ class DebtFlow {
                 concept:d.concept,
             });
         });
-        
+                
         
         function reduce_amount(pre, cur){
             return pre + cur.amount;

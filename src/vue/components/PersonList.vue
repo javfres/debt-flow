@@ -40,7 +40,7 @@
         </div>
 
 
-        <ModalNewPerson v-if="showModal" @close="showModal=false" @new_person="add_person"></ModalNewPerson>
+        <ModalNewPerson v-if="showModal" :people="value" @close="showModal=false" @new_person="add_person"></ModalNewPerson>
 
 
         <!--

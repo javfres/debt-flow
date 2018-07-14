@@ -27,20 +27,6 @@
                 </div>
                 
             </div>
-    
-            
-
-            
-            
-    
-            
-            
-        
-            
-
-
-
-
 
             
         </div>
@@ -48,12 +34,29 @@
       
       
       
-      <!--
-      
-      <Info :debtflow="debtflow"></Info>
-      <Results :debtflow="debtflow"></Results>
+    <section class="section">
+        <div class="container">
+            
+            <Info :debtflow="debtflow"></Info>
 
-    -->
+        </div>
+    </section>
+    
+    
+    <section class="section">
+        <div class="container">
+            
+            <Results :debtflow="debtflow"></Results>
+
+        </div>
+    </section>
+    
+    
+    
+    
+    
+    
+    
 
   </div>
 </template>
@@ -68,19 +71,39 @@ export default {
     data () {
         return {
             
-            people: ["Alice", "Bob", "Charles", "Dought"],
+            people: ["Alice", "Bob", "Charles", "Dana"],
             expenses: [
-                {who:"Alice",amount:2,concept:"Desert", to:['Bob']},
+                {who:"Alice",amount:2,concept:"Desert", to:['Alice','Bob']},
                 {who:"Alice",amount:12,concept:"Food"},
                 {who:"Charles",amount:10},
                 {who:"Charles",amount:13, concept:"Tortilla"},
-                {who:"Dought",amount:5, to:['Bob'],concept:"Beer"}],
+                {who:"Dana",amount:5, to:["Dana",'Bob'],concept:"Beer"}],
             debtflow: null,
     
         }
     },
   
     watch: {
+        
+        
+        people(){
+            
+            
+            this.expenses = _.filter(this.expenses, exp => {
+                
+                if(!_.includes(this.people, exp.who)) return false;
+                
+                if(exp.to){
+                    for(let i=0; i<exp.to.length; i++){
+                        if(!_.includes(this.people, exp.to[i])) return false;
+                    }
+                }
+                
+                return true;
+            });
+            
+            
+        },
         
         expenses(){
             this.call_debtflow();
@@ -98,7 +121,6 @@ export default {
             });
             
             this.expenses.map(e => {
-                console.log(e);
                 df.addExpense(e.who, e.amount, e.concept, e.to);
             });
             

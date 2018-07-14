@@ -38,7 +38,7 @@
             <div class="level-left"></div>
             <div class="level-right">
                 <p class="level-item"> Add new expense </p>        
-                <button class="level-item button is-primary" @click="showModal=true">Add</button>
+                <button class="level-item button is-primary" @click="open_modal()">Add</button>
             </div>
         </div>
                 
@@ -95,6 +95,11 @@ export default {
         
         },
 
+
+        open_modal(){
+            if(!this.people.length) return;
+            this.showModal=true;    
+        },
     
     } // methods
     

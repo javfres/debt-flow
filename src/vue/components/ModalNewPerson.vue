@@ -11,7 +11,8 @@
                 <div class="field">
                     <label class="label">Name</label>
                     <div class="control">
-                        <input class="input" type="text" placeholder="Name" v-model="name">
+                        <input :class="{'is-danger': error,input:true}" type="text" placeholder="Name" v-model="name">
+                        <p class="help is-danger">{{error}}</p>
                     </div>
                 </div>
 
@@ -36,22 +37,39 @@
 
 export default {
 
-    props: {
-    
-    },
+    props:['people'],
 
     data () {
         return {
             name: '',
+            error: "",
+        }
+    },
+    
+    watch: {
+        name(){
+            this.error = null;
         }
     },
     
     methods: {
         
         onSubmit(){
-            console.log("onSubmit: " + this.name);
             
-            if(!this.name) return;
+            let name = this.name.trim();
+            
+            if(!name){
+                this.error = "Name is required";
+                return;
+            };
+            
+            for(let i=0; i<this.people.length; i++){
+                if(this.people[i].toLowerCase() === name.toLowerCase()){
+                    this.error = "Name '" + name + "' is already used";
+                    return;
+                }
+            }
+            
             
             this.$emit('new_person', {
                 name:this.name

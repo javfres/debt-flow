@@ -22,7 +22,8 @@
                 <div class="field">
                     <label class="label">Amount</label>
                     <div class="control">
-                        <input class="input" type="number" placeholder="Amount" v-model="amount">
+                        <input :class="{'is-danger': error_amount, input:true}" type="number" step="0.01" placeholder="Amount" v-model="amount">
+                        <p class="help is-danger">{{error_amount}}</p>
                     </div>
                 </div>
 
@@ -52,11 +53,12 @@
                     <ul>
                         <li v-for="p in list">
                             <label class="checkbox" :disabled="shared==='all'">
-                                <input type="checkbox" v-model="p.is" :disabled="shared==='all' || p.name === who">        
+                                <input type="checkbox" v-model="p.is" :disabled="shared==='all'">        
                                 {{ p.name }}
                             </label>
                         </li>
                     </ul>
+                    <p class="help is-danger">{{error_list}}</p>
                 </div>
 
                 
@@ -94,12 +96,16 @@ export default {
             concept: '',
             shared: 'all',
             list: [],
+            error_amount: null,
+            error_list: null,
         }
     },
     
     mounted(){
     
         this.update_list();
+        
+        console.log(this.list);
         
     },
     
@@ -109,9 +115,18 @@ export default {
             this.update_list();
         },
         
+        amount(){
+            this.error_amount = null;
+        },
+        
         shared(){
             this.update_list();
         },
+        
+        "list" : {handler: function(){
+            this.error_list = null;
+        }, deep:true},
+        
         
     },
     
@@ -134,9 +149,14 @@ export default {
         
         onSubmit(){
             
+            if(!this.amount || this.amount<=0){
+                this.error_amount = 'Invalid amount';
+                return;
+            }
+            
             let expense = {
                 who: this.who,
-                amount: this.amount,
+                amount: +this.amount,
                 concept: this.concept,
                 to: null,
             }
@@ -147,6 +167,12 @@ export default {
                     if(!x.is) return;
                     expense.to.push(x.name);
                 });
+                
+                if(!expense.to.length){
+                    this.error_list = "List is empty";
+                    return;
+                }
+                
             }
             
             this.$emit('new_expense', expense);
