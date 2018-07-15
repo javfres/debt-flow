@@ -4,6 +4,14 @@
         <h1 class="title">Expenses list</h1>
         <p class="subtitle">List of the expenses done by each person</p>
 
+        <div class="level is-mobile">
+            <div class="level-left"></div>
+            <div class="level-right">
+                <p class="level-item"> Add new expense </p>        
+                <button class="level-item button is-primary" @click="open_modal()">Add</button>
+            </div>
+        </div>
+
         <table class="table is-hoverable is-fullwidth">
             <thead>
                 <tr>
@@ -34,13 +42,7 @@
 
     
                 
-        <div class="level is-mobile">
-            <div class="level-left"></div>
-            <div class="level-right">
-                <p class="level-item"> Add new expense </p>        
-                <button class="level-item button is-primary" @click="open_modal()">Add</button>
-            </div>
-        </div>
+
                 
                 
         <ModalNewExpense v-if="showModal"

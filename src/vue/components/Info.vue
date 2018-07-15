@@ -10,7 +10,7 @@
         <div>
             <div class="columns is-multiline is-tablet">
                 
-                <div class="column is-one-quarter" v-for="person in info">
+                <div class="column is-one-third" v-for="person in info">
                     
                     
                     <div class="card">
@@ -29,11 +29,15 @@
                         <footer class="card-footer">
                             <div class="card-footer-item  is-flex">
                                 <div class="has-text-grey small-title">Expenses</div>
-                                <div class="is-size-4">{{ person.total_expenses.toFixed(2) }}</div>
+                                <div class="is-size-5">{{ person.total_expenses.toFixed(2) }}</div>
+                            </div>
+                            <div class="card-footer-item  is-flex">
+                                <div class="has-text-grey small-title">For himself</div>
+                                <div class="is-size-5">{{ person.total_spents.toFixed(2) }}</div>
                             </div>
                             <div class="card-footer-item  is-flex">
                                 <div class="has-text-grey small-title">Debts</div>
-                                <div class="is-size-4">{{ person.total_debts.toFixed(2) }}</div>
+                                <div class="is-size-5">{{ person.total_debts.toFixed(2) }}</div>
                             </div>
 
                         </footer> <!-- card footer -->
@@ -42,7 +46,7 @@
                             <div class="card-footer-item">
 
                                 <div class="has-text-grey small-title">
-                                    <template v-if="person.bote<0">
+                                    <template v-if="person.bote>0">
                                         Should receive
                                     </template>
                                     <template v-else>
@@ -50,7 +54,7 @@
                                     </template>
                                 </div>
                                 
-                                <span :class="{'has-text-danger':person.bote>0,'has-text-success':person.bote<0}">
+                                <span :class="{'has-text-danger':person.bote<0,'has-text-success':person.bote>0}">
                                     <span class="is-size-4">{{ Math.abs((person.bote)).toFixed(2) }} </span>
                                 </span>
                                 
@@ -91,6 +95,11 @@
                 <div class="column"></div>
                 
             </div> <!-- columns -->
+            
+            
+            
+            
+            
         </div>
 
     
@@ -118,8 +127,18 @@ export default {
         }
     },
     
+    mounted(){
+        this.update();
+    },
+    
     watch: {
         debtflow(){
+            this.update();
+        }
+    },
+    
+    methods:{
+        update(){
             this.info = this.debtflow ? this.debtflow.info() : [];
         }
     },

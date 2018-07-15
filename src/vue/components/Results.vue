@@ -37,6 +37,14 @@
       
       
       
+      <p v-if="stats">To pay off debts it is requeried
+          <b>{{ stats.num_pays }} exchanges </b>
+          with a total of 
+          <b>{{ stats.money_moved.toFixed(2) }} money </b>
+           moved.
+      </p>
+      
+      
 
   </div>
 </template>
@@ -47,28 +55,35 @@
 
 export default {
 
-    props: ['debtflow'],
+    props: ['debtflow','only_known'],
 
     data () {
         return {
             flow: [],
-            stats: {},
+            stats: null,
         }
+    },
+    
+    mounted(){
+        this.update();
     },
     
     watch: {
         debtflow(){
-            
+            this.update();
+        }
+    },
+    
+    methods:{
+        update(){
             this.flow = [];
-            this.stats = {}
+            this.stats = null;
             
             if(this.debtflow){
-                let res = this.debtflow.flow();
+                let res = this.debtflow.flow(this.only_known);
                 this.flow = res.flow;
                 this.stats = res.stats;
             }
-            
-            console.log(this.flow );
         }
     },
     

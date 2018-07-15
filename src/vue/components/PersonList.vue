@@ -5,6 +5,14 @@
         <h1 class="title">Person list</h1>
         <p class="subtitle">List of people</p>
     
+        <div class="level is-mobile">
+            <div class="level-left"></div>
+            <div class="level-right">
+                <p class="level-item"> Add a new person </p>        
+                <button class="level-item button is-primary" @click="open_modal()">Add</button>
+            </div>
+        </div>
+    
         <table class="table is-hoverable is-fullwidth">
             <thead>
                 <tr>
@@ -31,13 +39,7 @@
         </table>
     
 
-        <div class="level is-mobile">
-            <div class="level-left"></div>
-            <div class="level-right">
-                <p class="level-item"> Add a new person </p>        
-                <button class="level-item button is-primary" @click="open_modal()">Add</button>
-            </div>
-        </div>
+
 
 
         <ModalNewPerson v-if="showModal" :people="value" @close="showModal=false" @new_person="add_person"></ModalNewPerson>

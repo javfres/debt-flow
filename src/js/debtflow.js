@@ -14,12 +14,14 @@ class DebtFlow {
         this.people = [];
         this.expenses = [];
         this.debts = [];
+        this.spents = [];
     } // constructor
     
     //
     // Add a new person (Ignore if duplicated)
     //
-    addPeople(who){    
+    addPeople(who){ 
+                  
         for(let i=0; i<this.people.length; i++){
             if(this.people[i] === who) return;
         }
@@ -32,7 +34,7 @@ class DebtFlow {
     // If to is null to all the group or to an array of users
     //
     addExpense(who, amount, concept, to = null){
-        
+
         this.addPeople(who);
         if(to){
             to.map(who => this.addPeople(who));
@@ -46,14 +48,19 @@ class DebtFlow {
     //
     addDebt(who, amount, to, concept = null){
     
-        // Just in case
-        //this.addPeople(who);
-        //this.addPeople(to);
-
         this.debts.push({who, amount, concept, to});
         
     } // addDebt
     
+    //
+    // Add a spent
+    // Is what the person has spent on himself 
+    //
+    addSpent(who, amount, concept = null){
+    
+        this.spents.push({who, amount, concept});
+        
+    } // addDebt
     
     //
     // Generate the debts from the expenses
@@ -61,16 +68,20 @@ class DebtFlow {
     process_debts(){
         
         this.debts = [];
-        
+        this.spents = [];
+
         this.expenses.map(e => {
-            
+                        
             let to = this.people;
             if(e.to){
                 to = e.to.map(x=>x); // To clone
             }
             
             to.map(t => {
-                if(e.who === t) return;
+                if(e.who === t){
+                    this.addSpent(t, e.amount / to.length, e.concept);
+                    return;
+                };
                 this.addDebt(t, e.amount / to.length, e.who, e.concept);
             });
         });
@@ -102,10 +113,12 @@ class DebtFlow {
                 total_expenses: 0,
                 debts: [],
                 total_debts: 0,
+                spents: [],
+                total_spents: 0,
                 bote: 0,
             };
         });
-        
+                
         // Add the expenses
         this.expenses.map(e => {
             
@@ -129,19 +142,29 @@ class DebtFlow {
             });
         });
                 
+        // Add the Spents
+        this.spents.map(d => {
+            
+            let idx = get_idx(d.who);
+            info[idx].spents.push({
+                amount:d.amount,
+                concept:d.concept,
+            });
+        });
         
         function reduce_amount(pre, cur){
             return pre + cur.amount;
         }
         
-        
+    
         // Calculate totals
         this.people.map((p,i) => {
             
             info[i].total_expenses = info[i].expenses.reduce(reduce_amount, 0);
             info[i].total_debts = info[i].debts.reduce(reduce_amount, 0);
+            info[i].total_spents = info[i].spents.reduce(reduce_amount, 0);
 
-            info[i].bote = info[i].total_debts-info[i].total_expenses;
+            info[i].bote = info[i].total_expenses-info[i].total_debts-info[i].total_spents;
 
         });
         

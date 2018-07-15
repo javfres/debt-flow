@@ -13,7 +13,7 @@
     <section class="section">
         <div class="container">
             
-            
+        
             <div class="columns is-desktop is-centered">
                 <div class="column">
                     
@@ -33,27 +33,47 @@
     </section>
       
       
+    <section class="section">
+        <div class="container">
+            
+
+        <div class="buttons has-addons is-centered">
+            <span class="button is-large is-primary" @click="calculate">Calculate</span>
+            
+            
+            <div class="field" style="margin-left:10px">
+                <input type="checkbox" id="onlyknown" class="switch" v-model="only_known">
+                <label for="onlyknown" title="Limits the money exchanges between people that already have debts">Only know people</label>
+            </div>
+                
+            
+        </div>
+              
+        </div>
+    </section>
+
+
+
+    <div ref="inforesults" v-if="debtflow">
       
-    <section class="section">
-        <div class="container">
+        <section class="section">
             
-            <Info :debtflow="debtflow"></Info>
+            <div class="container">
+                <Results :debtflow="debtflow" :only_known="only_known"></Results>
+            </div>
+        </section>
+        
+        <section class="section">
 
-        </div>
-    </section>
-    
-    
-    <section class="section">
-        <div class="container">
-            
-            <Results :debtflow="debtflow"></Results>
+            <div class="container">
+                <Info :debtflow="debtflow"></Info>
+            </div>
 
-        </div>
-    </section>
-    
-    
-    
-    
+        </section>
+    </div>
+        
+        
+        
     
     
     
@@ -73,11 +93,23 @@ export default {
             
             people: ["Alice", "Bob", "Charles", "Dana"],
             expenses: [
-                {who:"Alice",amount:2,concept:"Desert", to:['Alice','Bob']},
-                {who:"Alice",amount:12,concept:"Food"},
+                
+                /*
+                {who:"Alice",amount:20,concept:"Food", to:['Alice','Bob']},
+                {who:"Alice",amount:12,concept:"Desert"},
                 {who:"Charles",amount:10},
                 {who:"Charles",amount:13, concept:"Tortilla"},
-                {who:"Dana",amount:5, to:["Dana",'Bob'],concept:"Beer"}],
+                {who:"Dana",amount:15, to:["Dana",'Bob','Charles'],concept:"Beer"},
+                {who:"Bob", amount:5, to:["Dana"] },
+                */
+                
+                {who:"Alice",amount:20, to:['Bob']},
+                {who:"Bob",amount:20, to:['Charles']},
+                {who:"Charles",amount:20, to:['Dana']},
+        
+                
+            ],
+            only_known: true,
             debtflow: null,
     
         }
@@ -106,14 +138,22 @@ export default {
         },
         
         expenses(){
-            this.call_debtflow();
+            this.debtflow = null;
+        },
+        
+        only_known(){
+            this.debtflow = null;
         },
         
     },
     
     methods:{
         
-        call_debtflow(){
+        calculate(){
+            
+            //
+            // Debtflow
+            //
             const df = new DebtFlow();
             
             this.people.map(p => {
@@ -123,20 +163,31 @@ export default {
             this.expenses.map(e => {
                 df.addExpense(e.who, e.amount, e.concept, e.to);
             });
-            
+                        
             this.debtflow = df;
-        }
+            
+            //
+            // Show
+            //
+            
+            this.$nextTick(() => {
+                
+                let $div = $(this.$refs.inforesults);
+                
+                $div.hide();
+                $div.slideDown("slow");
+                
+                $('html, body').animate({
+                    scrollTop: $div.offset().top
+                }, 1000);
+                
+            });
+            
+            
+        } , // calculate
         
     },
   
-
-    mounted(){
-        this.call_debtflow();
-    },
-
-
-    beforeDestroy() {
-    },
     
 }
 
