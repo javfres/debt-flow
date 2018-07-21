@@ -5,7 +5,18 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">Debt Flow</h1>
-                <h2 class="subtitle">Calculate how much money should each person pay</h2>
+                <h2 class="subtitle">Tool to calculate shared expenses</h2>
+                
+                <div class="buttons">
+                    <a class="button is-outlined is-small is-primary is-inverted"
+                    @click="reset" title="Reset the data">Reset</a>
+                    <a class="button is-outlined is-small is-primary is-inverted"
+                    @click="test1" title="Load test data set 1">Test1</a>
+                    <a class="button is-outlined is-small is-primary is-inverted"
+                    @click="test2" title="Load test data set 2">Test2</a>
+                </div>
+            
+                
             </div>
         </div>
     </section>
@@ -13,7 +24,7 @@
     <section class="section">
         <div class="container">
             
-        
+    
             <div class="columns is-desktop is-centered">
                 <div class="column">
                     
@@ -148,6 +159,36 @@ export default {
     },
     
     methods:{
+        
+        reset(){
+            this.people = [];
+        },
+        
+        test1(){
+            
+            this.people = ["Alice", "Bob", "Charles", "Dana"],
+            this.expenses = [
+                {who:"Alice",amount:20,concept:"Food", to:['Alice','Bob']},
+                {who:"Alice",amount:12,concept:"Desert"},
+                {who:"Charles",amount:10},
+                {who:"Charles",amount:13, concept:"Tortilla"},
+                {who:"Dana",amount:15, to:["Dana",'Bob','Charles'],concept:"Beer"},
+                {who:"Bob", amount:5, to:["Dana"] },
+            ];
+            
+        },
+        
+        test2(){
+            
+            this.people = ["Alice", "Bob", "Charles", "Dana"],
+            this.expenses = [
+                {who:"Alice",amount:20, to:['Bob']},
+                {who:"Bob",amount:20, to:['Charles']},
+                {who:"Charles",amount:20, to:['Dana']},    
+            ];
+            
+        },
+
         
         calculate(){
             

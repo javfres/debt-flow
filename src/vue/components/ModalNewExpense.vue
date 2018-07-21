@@ -104,9 +104,7 @@ export default {
     mounted(){
     
         this.update_list();
-        
-        console.log(this.list);
-        
+                
     },
     
     watch: {
