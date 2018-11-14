@@ -54,7 +54,7 @@
             
             <div class="field" style="margin-left:10px">
                 <input type="checkbox" id="onlyknown" class="switch" v-model="only_known">
-                <label for="onlyknown" title="Limits the money exchanges between people that already have debts">Only know people</label>
+                <label for="onlyknown" title="Limits the money exchanges between people that already have debts">Only between known people</label>
             </div>
                 
             
